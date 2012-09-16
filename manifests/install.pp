@@ -33,7 +33,8 @@ class homebrew::install( $prefix ) {
 
   exec { 'install-homebrew':
     cwd       => $prefix,
-    command   => "/usr/bin/su ${homebrew::user} -c '/bin/bash -o pipefail -c \"/usr/bin/curl -skSfL https://github.com/mxcl/homebrew/tarball/master | /usr/bin/tar xz -m --strip 1\"'",
+    user      => $homebrew::user,
+    command   => "/usr/bin/curl -skSfL https://github.com/mxcl/homebrew/tarball/master | /usr/bin/tar xz -m --strip 1",
     creates   => "${prefix}/bin/brew",
     logoutput => on_failure,
     timeout   => 0,
