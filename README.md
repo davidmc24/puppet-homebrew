@@ -21,8 +21,9 @@ To install homebrew on a node (with a compiler already present!):
 
 ```puppet
 class { 'homebrew':
-  user   => 'hightower',                  # Defaults to 'root'
-  prefix => '/Users/hightower/.homebrew', # Defaults to '/usr/local'
+  user             => 'hightower',                  # Defaults to 'root'
+  prefix           => '/Users/hightower/.homebrew', # Defaults to '/usr/local'
+  group_accessible => true,                         # Defalts to false
 }
 ```
 

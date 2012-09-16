@@ -8,4 +8,5 @@ class homebrew::params {
   $command_line_tools_source  = 'http://puppet/command_line_tools_for_xcode_os_x_lion_aug_2013.dmg'
   $user                       = 'root'
   $prefix                     = '/usr/local'
+  $group_accessible           = false
 }

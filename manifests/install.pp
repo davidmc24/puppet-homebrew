@@ -1,4 +1,4 @@
-class homebrew::install( $prefix ) {
+class homebrew::install( $prefix, $group_accessible ) {
   $directories = [ $prefix,
                    "${prefix}/bin",
                    "${prefix}/etc",
@@ -28,7 +28,10 @@ class homebrew::install( $prefix ) {
     ensure   => directory,
     owner    => $homebrew::user,
     group    => 'admin',
-    mode     => 0775,
+    mode     => $group_accessible ? {
+      true  => 0775,
+      false => 0755,
+    },
   }
 
   exec { 'install-homebrew':
@@ -44,7 +47,10 @@ class homebrew::install( $prefix ) {
   file { "${prefix}/bin/brew":
     owner     => $homebrew::user,
     group     => 'admin',
-    mode      => 0775,
+    mode      => $group_accessible ? {
+      true  => 0775,
+      false => 0755,
+    },
     require   => Exec['install-homebrew'],
   }
 }
